@@ -24,19 +24,15 @@ namespace Eva.Application
             _unitOfWork.Complete();
         }
 
-        public IEnumerable<Book> GetAll(string filterBy = null, string orderBy = null)
+        public IEnumerable<Book> Get(string filterBy = null, string orderBy = null)
         {
             Expression<Func<Book, bool>> expr = null;
-            if (string.IsNullOrEmpty(filterBy))
+            if (!string.IsNullOrEmpty(filterBy))
                 expr = (b => b.ISBN.Contains(filterBy) || b.Name.Contains(filterBy));
 
-            var propertyName = TypeDescriptor
-                                        .GetProperties(typeof(Book))
-                                        .Find(orderBy, true);
 
             var result = _unitOfWork.Books
-                                    .GetAll(expr)
-                                    .OrderBy(b => propertyName.GetValue(b));
+                                    .GetAll(expr);
             return result;
         }
 

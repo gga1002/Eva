@@ -7,29 +7,28 @@ using System.Web.Http;
 
 namespace Eva.Controllers
 {
-    public class BookController : ApiController
+    public class BooksController : ApiController
     {
         private readonly IBookService _service;
         
-        public BookController(IBookService service)
+        public BooksController(IBookService service)
         {
             _service = service;
         }
 
-        public IHttpActionResult Add(Book book)
+        [HttpPost]
+        public IHttpActionResult Add([FromBody]Book book)
         {
-            var books = _service.GetAll();
+            var books = _service.Get();
 
             if (book == null)
-                return BadRequest();
-
-            if (books.Any(b => b.Name == book.Name))
                 return BadRequest();
 
             _service.Add(book);
             return Ok();
         }
 
+        [Authorize][HttpPut, HttpPatch]
         public IHttpActionResult Update(Book book)
         {
             try
@@ -43,10 +42,22 @@ namespace Eva.Controllers
             }
         }
 
+        [Authorize][HttpDelete]
         public IHttpActionResult Remove(int id)
         {
             _service.Remove(1);
             return Ok();
+        }
+
+        [HttpGet]
+        public IHttpActionResult Get(string query = null)
+        {
+            var result = _service.Get(query);
+
+            if (result == null || result.Count() == 0)
+                return NotFound();
+
+            return Ok(result);
         }
     }
 }

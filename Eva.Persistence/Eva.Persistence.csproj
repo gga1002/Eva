@@ -69,14 +69,30 @@
     <Compile Include="Migrations\201805182104575_AddIssueAndPaymentModels.Designer.cs">
       <DependentUpon>201805182104575_AddIssueAndPaymentModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805211423402_updateEntityAtributes.cs" />
+    <Compile Include="Migrations\201805211423402_updateEntityAtributes.Designer.cs">
+      <DependentUpon>201805211423402_updateEntityAtributes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805211549237_AddQuantityToBook.cs" />
+    <Compile Include="Migrations\201805211549237_AddQuantityToBook.Designer.cs">
+      <DependentUpon>201805211549237_AddQuantityToBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805212118417_AddGenre.cs" />
+    <Compile Include="Migrations\201805212118417_AddGenre.Designer.cs">
+      <DependentUpon>201805212118417_AddGenre.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BookRepository.cs" />
+    <Compile Include="Repositories\GenreRepository.cs" />
+    <Compile Include="Repositories\PaymentRepository.cs" />
+    <Compile Include="Repositories\IssueRepository.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Scripts\angular.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Eva.Core\Eva.Core.csproj">
@@ -100,6 +116,20 @@
     <EmbeddedResource Include="Migrations\201805182104575_AddIssueAndPaymentModels.resx">
       <DependentUpon>201805182104575_AddIssueAndPaymentModels.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805211423402_updateEntityAtributes.resx">
+      <DependentUpon>201805211423402_updateEntityAtributes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805211549237_AddQuantityToBook.resx">
+      <DependentUpon>201805211549237_AddQuantityToBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805212118417_AddGenre.resx">
+      <DependentUpon>201805212118417_AddGenre.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -5,6 +5,7 @@ using Eva.Controllers;
 using Eva.Core.Models;
 using FluentAssertions;
 using Eva.Application;
+using Eva.Tests.Controllers.Extensions;
 using Moq;
 
 namespace Eva.Tests.Controllers.Api
@@ -12,13 +13,17 @@ namespace Eva.Tests.Controllers.Api
     [TestClass]
     public class BookControllerTests
     {
-        private BookController _controller;
+        private BooksController _controller;
         private Mock<IBookService> _mockBookService;
+        private string _userId;
+
         [TestInitialize]
         public void TestInitialize()
         {
+            _userId = "1";
             _mockBookService = new Mock<IBookService>();
-            _controller = new BookController(_mockBookService.Object);
+            _controller = new BooksController(_mockBookService.Object);
+            _controller.MockCurrentUser(_userId, "user@mail.com");
         }
 
         [TestMethod]
@@ -34,22 +39,6 @@ namespace Eva.Tests.Controllers.Api
             result.Should().BeOfType<BadRequestResult>();
         }
 
-        [TestMethod]
-        public void Add_BookTitleAlreadyExists_ShoudReturnBadRequest()
-        {
-            //Arrange
-            var book = new Book { Name = "Le Petit Prince" };
-            List<Book> books = new List<Book>();
-            books.Add(book);
-            _mockBookService.Setup(s => s.GetAll(null, null)).Returns(books);
-
-
-            //Act
-            var result = _controller.Add(book);
-
-            //Assert
-            result.Should().BeOfType<BadRequestResult>();
-        }
         [TestMethod]
         public void Add_ValidRequest_ShouldReturnOk()
         {
@@ -89,5 +78,36 @@ namespace Eva.Tests.Controllers.Api
             result.Should().BeOfType<OkResult>();
         }
 
+
+        [TestMethod]
+        public void Get_ValidRequest_ShouldReturnOk()
+        {
+            //Arrange
+            var book = new Book { Name = "Le Petit Prince" };
+            var bookTwo = new Book { Name = "Les Miserable" };
+            List<Book> books = new List<Book>
+            {
+                book, bookTwo
+            };
+            _mockBookService.Setup(s => s.Get(null, null)).Returns(books);
+
+            //Act
+            var result = _controller.Get();
+            var type = result.GetType();
+            //Assert
+            result.Should().BeOfType<OkNegotiatedContentResult<IEnumerable<Book>>>();
+        }
+
+        [TestMethod]
+        public void Get_NoResults_ShouldReturnNotFound()
+        {
+            //Arrange
+
+            //Act
+            var result = _controller.Get();
+            var type = result.GetType();
+            //Assert
+            result.Should().BeOfType<NotFoundResult>();
+        }
     }
 }

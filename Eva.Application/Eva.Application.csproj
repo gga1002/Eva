@@ -41,7 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BookService.cs" />
+    <Compile Include="GenreService.cs" />
     <Compile Include="IBookService.cs" />
+    <Compile Include="IGenreService.cs" />
+    <Compile Include="IIssueService.cs" />
+    <Compile Include="IssueService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

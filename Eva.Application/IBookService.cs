@@ -9,7 +9,7 @@ namespace Eva.Application
     {
         void Add(Book book);
 
-        IEnumerable<Book> GetAll(string filterBy =null, string orderBy = null);
+        IEnumerable<Book> Get(string filterBy =null, string orderBy = null);
 
         void Update(Book book);
 

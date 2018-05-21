@@ -1,0 +1,47 @@
+﻿<div style="padding-left:20px; padding-right:20px">
+    <div class="container">
+        <h1>Add Book To Inventory</h1>
+        <hr>
+        <form name="addBookForm" class="form-horizontal">
+
+                <div class="form-group">
+                    <label for="bookName">Name:</label>
+                    <input id="bookName" type="text" required ng-model="book.Name" 
+                           class="form-control" placeholder="Name of the book..." />
+                </div>
+
+                <div class="form-group">
+                    <label for="bookIsbn">ISBN:</label>
+                    <input id="bookIsbn" type="text" required ng-model="book.ISBN" 
+                           class="form-control" placeholder="ISBN of the book..." />
+                </div>
+                <div class="form-group">
+                    <label for="bookAuthor">Author:</label>
+                    <input id="bookAuthor" type="text" required ng-model="book.Author" 
+                           class="form-control" placeholder="Author of the book..." />
+                </div>
+                <div class="form-group">
+                    <label for="bookGenre">Genre:</label>
+                    <select ng-options="genre as genre.name for genre in genres track by genre.id" ng-model="book.GenreId" 
+                            class="form-control"></select>
+                </div>
+                <div class="form-group">
+
+                    <label for="bookQuantity">Quantity:</label>
+                    <input id="bookQuantity" type="text" required ng-model="book.Quantity" placeholder="Quantity available..."
+                           class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label for="bookImageUrl">Image:</label>
+                    <input id="bookImageUrl" type="url" ng-model="book.imageUrl" class="input-xlarge" placeholder="url of image..." />
+                </div>
+            <img ng-src="{{book.imageUrl}}" />
+            <br />
+            <br />
+
+            <button type="submit" ng-disabled="addBookForm.$invalid" ng-click="AddBook(book, addBookForm)" class="btn btn-primary">Save</button>
+            <button type="button" ng-click="cancel()" class="btn btn-default">Cancel</button>
+        </form>
+    </div>
+</div>
+

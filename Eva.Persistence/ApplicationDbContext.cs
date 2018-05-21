@@ -10,6 +10,7 @@ namespace Eva.Persistence
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
     {
         public DbSet<Book> Books { get; set; }
+        public DbSet<Genre> Genres { get; set; }
         public DbSet<Issue> Issues { get; set; }
         public DbSet<Payment> Payments { get; set; }
 
@@ -22,5 +23,6 @@ namespace Eva.Persistence
         {
             return new ApplicationDbContext();
         }
+        
     }
 }

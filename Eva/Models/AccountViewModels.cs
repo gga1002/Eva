@@ -9,9 +9,7 @@ namespace Eva.Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
-
-        [Display(Name = "Hometown")]
-        public string Hometown { get; set; }
+        
     }
 
     public class ExternalLoginListViewModel
@@ -19,13 +17,6 @@ namespace Eva.Models
         public string ReturnUrl { get; set; }
     }
 
-    public class SendCodeViewModel
-    {
-        public string SelectedProvider { get; set; }
-        public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
-        public string ReturnUrl { get; set; }
-        public bool RememberMe { get; set; }
-    }
 
     public class VerifyCodeViewModel
     {
@@ -50,21 +41,7 @@ namespace Eva.Models
         public string Email { get; set; }
     }
 
-    public class LoginViewModel
-    {
-        [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
 
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
-
-        [Display(Name = "Remember me?")]
-        public bool RememberMe { get; set; }
-    }
 
     public class RegisterViewModel
     {
@@ -84,8 +61,10 @@ namespace Eva.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Display(Name = "Hometown")]
-        public string Hometown { get; set; }
+
+        [Required]
+        [Display(Name = "Name")]
+        public string Name { get; set; }
     }
 
     public class ResetPasswordViewModel
